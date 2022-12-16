@@ -1,0 +1,190 @@
+<html lang="en"><head>
+
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+
+
+  <title>CRLF Injection - PoC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  
+<style>
+@import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono|Montserrat:700");
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    color: inherit;
+}
+
+body {
+    background-image: linear-gradient(120deg, #121212 0%, #000000 100%);
+    height: 100vh;
+}
+
+h1 {
+    font-size: 45vw;
+    text-align: center;
+    position: fixed;
+    width: 100vw;
+    z-index: 1;
+    color: #ffffff26;
+    text-shadow: 0 0 50px rgba(0, 0, 0, 0.07);
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "Montserrat", monospace;
+}
+
+div {
+    background: rgba(0, 0, 0, 0);
+    width: 70vw;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 auto;
+    padding: 30px 30px 10px;
+    box-shadow: 0 0 150px -20px rgba(0, 0, 0, 0.5);
+    z-index: 3;
+}
+
+P {
+    font-family: "Share Tech Mono", monospace;
+    color: #f5f5f5;
+    margin: 0 0 20px;
+    font-size: 17px;
+    line-height: 1.2;
+}
+
+span {
+    color: #f0c674;
+}
+
+i {
+    color: #8abeb7;
+}
+
+div a {
+    text-decoration: none;
+}
+
+b {
+    color: #81a2be;
+}
+
+a.avatar {
+    position: fixed;
+    bottom: 15px;
+    right: -100px;
+    -webkit-animation: slide 0.5s 4.5s forwards;
+            animation: slide 0.5s 4.5s forwards;
+    display: block;
+    z-index: 4
+}
+
+a.avatar img {
+    border-radius: 100%;
+    width: 44px;
+    border: 2px solid white;
+}
+
+@-webkit-keyframes slide {
+    from {
+        right: -100px;
+        transform: rotate(360deg);
+        opacity: 0;
+    }
+    to {
+        right: 15px;
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes slide {
+    from {
+        right: -100px;
+        transform: rotate(360deg);
+        opacity: 0;
+    }
+    to {
+        right: 15px;
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no">
+  <h1>hexygo</h1>
+<div><p>&gt; <span>Vulnerability Name</span>: "<i>CRLF INJECTION</i>"</p>
+<p>&gt; <span>DESCRIPTION</span>: "<i>The website located at https://lumen.com suffers from CRLF injection.
+This allows me to inject JavaScript, HTML as well as arbitrary HTTP Headers.
+Besides this, I can change the HTTP Response code as well, to display whatever I want in the victim's browser.</i>"</p>
+<p>&gt; <span>Proof of Concept</span>: [<b>go to https://lumen.com/%0Aset-cookie:%20injected=hexygo </span>: [<a href="https://lumen.com/%0Aset-cookie:%20hello=l4gtr4">>>PoC URL<<<</a> ]</p>
+<p>&gt; <span>The HTTP Response contains the injected Cookie!</span></p>
+<p>&gt; <span>I hope this report will be useful</span></p>
+<p>&gt; <span>Paypal</span>: "<i>monaimr46@gmail.com</i>"</p>
+<p>&gt; <span>coinbase</span>: "<i>monaimr46@gmail.com</i>"</p>
+<p>&gt; <span>BTC</span>: "<i>39X6wNeMG5YfgZo1poTRbbCYn5hhZ1kfaS</i>"</p>
+<p>&gt; <span>LTC</span>: "<i>MQ7JgpzhXZLb7YNQCehktJknLDuw8RfJys</i>"</p>
+<p>&gt; <span>DASH</span>: "<i>Xmg1mhfNZoFLk6J89ZYRXeRhLcFvDxsGRb</i>"</p>
+<p>&gt; <span>HAVE A NICE DAY SIR :-)</span></p>
+
+</div>
+
+
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+  
+      <script id="rendered-js">
+var str = document.getElementsByTagName('div')[0].innerHTML.toString();
+var i = 0;
+document.getElementsByTagName('div')[0].innerHTML = "";
+
+setTimeout(function () {
+  var se = setInterval(function () {
+    i++;
+    document.getElementsByTagName('div')[0].innerHTML = str.slice(0, i) + "|";
+    if (i == str.length) {
+      clearInterval(se);
+      document.getElementsByTagName('div')[0].innerHTML = str;
+    }
+  }, 10);
+}, 0);
+//# sourceURL=pen.js
+    </script>
+
+  
+
+
+
+
+ 
+</body></html>
